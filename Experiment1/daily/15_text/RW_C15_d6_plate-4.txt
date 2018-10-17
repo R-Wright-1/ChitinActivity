@@ -1,0 +1,46 @@
+
+
+Software Version	3.00.19
+
+
+
+Experiment File Path:	C:\Users\Public\Documents\Experiments\RW_C15_d6_plate-4.xpt
+Protocol File Path:	C:\Users\Public\Documents\Protocols\RW_chitinase_fluorescence.prt
+
+
+
+Plate Number	Plate 1
+Date	20/01/2017
+Time	10:07:09
+Reader Type:	Synergy HTX
+Reader Serial Number:	1607191D
+Reading Type	Reader
+
+Procedure Details
+
+Plate Type	96 WELL PLATE
+Eject plate on completion	
+Read	Fluorescence Endpoint
+	Full Plate
+	Filter Set 1
+	    Excitation: 360/40,  Emission: 460/40
+	    Optics: Top,  Gain: 55
+	Light Source: Tungsten,  Standard Dynamic Range
+	Read Speed: Normal,  Delay: 100 msec,  Measurements/Data Point: 10
+	Read Height: 1 mm
+
+
+
+Actual Temperature:	18.5
+
+Results
+	1	2	3	4	5	6	7	8	9	10	11	12
+A	72263	50935	37814	13200	5869	68	1843	2543	3880	1994	1662	3955	360/40,460/40
+B	2417	2495	2693	4197	2892	3852	2098	2463	3979	3130	2448	3442	360/40,460/40
+C	2588	2160	2973	16226	2594	4508	3004	2410	2922	1643	2790	1768	360/40,460/40
+D	7255	2661	1665	4927	6912	4806	2664	2134	2005	2696	2544	2584	360/40,460/40
+E	3163	4255	3774	2187	1925	1972	2604	2758	3341	3049	2145	2471	360/40,460/40
+F	5613	3838	3569	3009	4440	4218	2621	2248	3922	2382	3367	3265	360/40,460/40
+G	10515	2510	3242	2586	2298	3687	3567	3763	3927	2779	2157	4912	360/40,460/40
+H	7720	21831	2783	3653	3783	6508	5421	9974	2357	2765	3009	3118	360/40,460/40
+

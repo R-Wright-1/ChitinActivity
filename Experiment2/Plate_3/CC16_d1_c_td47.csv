@@ -1,0 +1,35 @@
+Software Version,3.00.19,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Experiment File Path:,C:\Users\Public\Documents\Experiments\RW\C3\CC16_d1_c_td47.xpt,,,,,,,,,,,,,
+Protocol File Path:,C:\Users\Public\Documents\Protocols\RW_chitinase_fluorescence.prt,,,,,,,,,,,,,
+Plate Number,Plate 1,,,,,,,,,,,,,
+Date,25/02/2018,,,,,,,,,,,,,
+Time,20:57:38,,,,,,,,,,,,,
+Reader Type:,Synergy HTX,,,,,,,,,,,,,
+Reader Serial Number:,1607191D,,,,,,,,,,,,,
+Reading Type,Reader,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Procedure Details,,,,,,,,,,,,,,
+Plate Type,96 WELL PLATE,,,,,,,,,,,,,
+Eject plate on completion,,,,,,,,,,,,,,
+Read,Fluorescence Endpoint,,,,,,,,,,,,,
+,Full Plate,,,,,,,,,,,,,
+,Filter Set 1,,,,,,,,,,,,,
+,"    Excitation: 360/40,  Emission: 460/40",,,,,,,,,,,,,
+,"    Optics: Top,  Gain: 55",,,,,,,,,,,,,
+,"Light Source: Tungsten,  Standard Dynamic Range",,,,,,,,,,,,,
+,"Read Speed: Normal,  Delay: 100 msec,  Measurements/Data Point: 10",,,,,,,,,,,,,
+,Read Height: 1 mm,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Results,,,,,,,,,,,,,,
+Actual Temperature:,22.1,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,1,2,3,4,5,6,7,8,9,10,11,12,
+,A,42,4104,14637,27514,45470,63550,44,3811,15082,28314,46417,61437,"360/40,460/40"
+,B,8,661,1415,528,1454,405,699,709,582,1024,1269,9,"360/40,460/40"
+,C,8,4567,739,3040,529,799,1811,1786,1731,630,1655,10,"360/40,460/40"
+,D,7,2891,1973,4087,2870,1224,2183,137,539,682,1638,9,"360/40,460/40"
+,E,9,154,138,161,152,398,168,200,147,132,182,10,"360/40,460/40"
+,F,8,173,175,451,199,1140,251,236,182,197,245,10,"360/40,460/40"
+,G,11,166,206,162,156,757,178,148,240,146,193,12,"360/40,460/40"
+,H,10,9,9,8,9,9,9,10,10,10,10,10,"360/40,460/40"

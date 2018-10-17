@@ -1,0 +1,35 @@
+Software Version,3.00.19,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Experiment File Path:,C:\Users\Public\Documents\Experiments\RW\RW_C14_MUF-mix_plate-3.xpt,,,,,,,,,,,,,
+Protocol File Path:,C:\Users\Public\Documents\Protocols\RW_chitinase_fluorescence.prt,,,,,,,,,,,,,
+Plate Number,Plate 1,,,,,,,,,,,,,
+Date,14/01/2017,,,,,,,,,,,,,
+Time,14:20:45,,,,,,,,,,,,,
+Reader Type:,Synergy HTX,,,,,,,,,,,,,
+Reader Serial Number:,1607191D,,,,,,,,,,,,,
+Reading Type,Reader,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Procedure Details,,,,,,,,,,,,,,
+Plate Type,96 WELL PLATE,,,,,,,,,,,,,
+Eject plate on completion,,,,,,,,,,,,,,
+Read,Fluorescence Endpoint,,,,,,,,,,,,,
+,Full Plate,,,,,,,,,,,,,
+,Filter Set 1,,,,,,,,,,,,,
+,"    Excitation: 360/40,  Emission: 460/40",,,,,,,,,,,,,
+,"    Optics: Top,  Gain: 55",,,,,,,,,,,,,
+,"Light Source: Tungsten,  Standard Dynamic Range",,,,,,,,,,,,,
+,"Read Speed: Normal,  Delay: 100 msec,  Measurements/Data Point: 10",,,,,,,,,,,,,
+,Read Height: 1 mm,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Results,,,,,,,,,,,,,,
+Actual Temperature:,19.1,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,1,2,3,4,5,6,7,8,9,10,11,12,
+,A,61623,40379,23912,6958,1564,66,751,786,634,881,493,586,"360/40,460/40"
+,B,700,1249,791,1035,5719,816,786,853,331,1079,672,973,"360/40,460/40"
+,C,962,923,899,1281,1130,1134,2244,238,967,2061,1833,490,"360/40,460/40"
+,D,939,646,1425,1011,1219,832,1050,1161,1605,678,736,955,"360/40,460/40"
+,E,876,1050,1111,907,915,936,2937,1126,1710,888,4086,2790,"360/40,460/40"
+,F,3483,2446,3709,568,1171,613,1901,1867,569,936,594,607,"360/40,460/40"
+,G,1658,1545,824,596,703,656,20419,563,619,1642,695,1425,"360/40,460/40"
+,H,1087,740,425,2739,851,902,3129,1227,1081,5859,2519,12253,"360/40,460/40"
