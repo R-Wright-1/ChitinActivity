@@ -519,7 +519,7 @@ def get_paper_plot(LS, g):
     os.chdir(bdir+'figures/')
     col_l, col_s = '#48C9B0', '#F39C12'
     fig = plt.figure(figsize=(8, 6))
-    ax1 = plt.subplot2grid((3, 10), (0, 0), colspan=7, rowspan=2)
+    ax1 = plt.subplot2grid((3, 20), (0, 0), colspan=13, rowspan=2)
     ax2 = plt.subplot2grid((3, 10), (0, 7), colspan=3)
     ax2.text(-3, -0.4, r'Chitinase $\mu$M day$^{-1}$', rotation=90, ha='center', va='center')
     ax3 = plt.subplot2grid((3, 10), (1, 7), colspan=3)
@@ -537,18 +537,18 @@ def get_paper_plot(LS, g):
     est = sm.OLS(df[['Y']], y_pred)
     pval =  est.fit().f_pvalue
     r2 = est.fit().rsquared
-    ax1.plot(g[0], y_pred, '-.', color=col_s)
+    ax1.plot(g[0], y_pred, '-.', color=col_s, linewidth=1)
     label='Selection (nine-day)'
     label2 = r'$r^2$'+'=%.2f'%r2
     label2 += ', '+r'$p$'+'=%.2f'%pval
-    ax1.plot(g[0], y_pred, '-.', color=col_l)
-    ax1.plot(g[0], LS[0], color=col_l, marker='o', label=label)
-    ax1.plot(g[0], LS[0], color=col_l, label=label2)
-    ax1.plot([14, 15, 16], [LS[0][14], g15_g[2]-g15_r[2], LS[0][16]], marker='o', color=col_l)
+    ax1.plot(g[0], y_pred, '-.', color=col_l, linewidth=1)
+    ax1.plot(g[0], LS[0], color=col_l, marker='o', label=label, markeredgecolor='k', linewidth=1)
+    ax1.plot(g[0], LS[0], color=col_l, label=label2, linewidth=1)
+    ax1.plot([14, 15, 16], [LS[0][14], g15_g[2]-g15_r[2], LS[0][16]], marker='o', color=col_l, markeredgecolor='k', linewidth=1)
     ax1.annotate('C', xy=(19.8, LS[1][-1]), xytext=(18, LS[1][-1]-0.15),arrowprops={'arrowstyle':'->'})
     ax1.text(17.5, LS[1][-1]-0.22, 'day 2', fontsize=8)
     label = 'Selection (four-day)'
-    ax1.plot(g[1], LS[1], color=col_s, marker='o', label=label)
+    ax1.plot(g[1], LS[1], color=col_s, marker='o', label=label, markeredgecolor='k', linewidth=1)
     with open('For regression short day 2.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(['X', 'Y'])
@@ -563,17 +563,17 @@ def get_paper_plot(LS, g):
     label2 = r'$r^2$'+'=%.2f'%r2_2day
     label2 += ', '+r'$p$'+'=%.2f'%pval_2day
     label2 += ' (day 2)'
-    ax1.plot(g[1], LS[1], color=col_s, label=label2)
+    ax1.plot(g[1], LS[1], color=col_s, label=label2, linewidth=1)
     do = '#cc5500'
     #do = '#51412d'
-    ax1.plot(g[1], y_pred, '-.', color=do)
+    ax1.plot(g[1], y_pred, '-.', color=do, linewidth=1)
     
     day4 = LS[1]
     #diff = (g20_g[1]-g20_r[1])-(g20_g[3]-g20_r[3])
     day4[-1] = g20_g[3]-g20_r[3]
     ax1.annotate('C', xy=(19.8, day4[-1]), xytext=(19, day4[-1]-0.18),arrowprops={'arrowstyle':'->'})
     ax1.text(18.5, day4[-1]-0.25, 'day 4', fontsize=8)
-    ax1.plot(g[1][-2:], day4[-2:], color=col_s, marker='o')
+    ax1.plot(g[1][-2:], day4[-2:], color=col_s, marker='o', markeredgecolor='k', linewidth=1)
     with open('For regression short day 4.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(['X', 'Y'])
@@ -588,18 +588,18 @@ def get_paper_plot(LS, g):
     label3 = r'$r^2$'+'=%.2f'%r2_4day
     label3 += ', '+r'$p$'+'=%.2f'%pval_4day
     label3 += ' (day 4)'
-    ax1.plot(g[1][-2:], day4[-2:], color=col_s, label=label3)  
-    ax1.plot(g[1], y_pred, '-.', color=do)    
+    ax1.plot(g[1][-2:], day4[-2:], color=col_s, label=label3, linewidth=1)  
+    ax1.plot(g[1], y_pred, '-.', color=do, linewidth=1)    
     
     ax1.annotate('B', xy=(14.8, LS[0][15]), xytext=(13, LS[0][15]-0.1),arrowprops={'arrowstyle':'->'})
     ax1.text(12.5, LS[0][15]-0.17, 'day 9', fontsize=8)
     ax1.annotate('B', xy=(14.8, g15_g[2]-g15_r[2]), xytext=(13, g15_g[2]-g15_r[2]-0.05),arrowprops={'arrowstyle':'->'})
     ax1.text(12.5, g15_g[2]-g15_r[2]-0.1, 'day 4', fontsize=8)
     
-    ax1.legend(bbox_to_anchor=(0.42,1), fontsize=8, frameon=False, numpoints=1, handlelength=0)
-    ax1.plot([0, 20], [0, 0], 'k--')
-    ax2.plot([0, 10], [0, 0], 'k--')
-    ax3.plot([0, 5], [0, 0], 'k--')
+    ax1.legend(loc='upper left', fontsize=8, frameon=False, numpoints=1, handlelength=0)
+    ax1.plot([0, 20], [0, 0], 'k--', linewidth=1)
+    ax2.plot([0, 10], [0, 0], 'k--', linewidth=1)
+    ax3.plot([0, 5], [0, 0], 'k--', linewidth=1)
     ax1.set_xlim([-1, 21])
     ax1.set_ylim([-0.4, 0.9])
     ax1.set_xticks([0, 5, 10, 15, 20])
@@ -608,14 +608,14 @@ def get_paper_plot(LS, g):
     ge = [g15_re, g15_ge, g20_re, g20_ge]
     colors = ['#66CCFF', '#FF0099']
     ax3.set_xlim([0, 5])
-    ax3.errorbar(days_20, g[2], yerr=ge[2], color=colors[0], marker='o')
-    ax3.errorbar(days_20, g[3], yerr=ge[3], color=colors[1], marker='o')
+    ax3.errorbar(days_20, g[2], yerr=ge[2], color=colors[0], marker='o', markeredgecolor='k', capsize=2, linewidth=1)
+    ax3.errorbar(days_20, g[3], yerr=ge[3], color=colors[1], marker='o', markeredgecolor='k', capsize=2, linewidth=1)
     days_15 = [1, 2, 4, 6, 9]
-    ax2.errorbar(days_15, g[0], yerr=ge[0], color=colors[0], marker='o', label='Random selection')
-    ax2.errorbar(days_15, g[1], yerr=ge[1], color=colors[1], marker='o', label='Positive selection')
+    ax2.errorbar(days_15, g[0], yerr=ge[0], color=colors[0], marker='o', label='Random selection', markeredgecolor='k', capsize=2, linewidth=1)
+    ax2.errorbar(days_15, g[1], yerr=ge[1], color=colors[1], marker='o', label='Positive selection', markeredgecolor='k', capsize=2, linewidth=1)
     ax2.tick_params(axis='both', which='right', length=0)
     ax3.tick_params(axis='both', which='right', length=0)
-    ax2.legend(bbox_to_anchor=(0.9, 1), fontsize=8, frameon=False, numpoints=1, handlelength=0)
+    ax2.legend(loc='upper left', fontsize=8, frameon=False, numpoints=1, handlelength=0)
     ax1.tick_params(axis='both', which='right', length=0)
     ax3.tick_params(axis='both', which='right', length=0)
     ax1.set_ylabel(r'Chitinase $\mu$M day$^{-1}$')
@@ -631,7 +631,7 @@ def get_paper_plot(LS, g):
     ax1.set_title('A', loc='left', fontweight='bold', fontsize=14)
     ax2.set_title('B', loc='left', fontweight='bold', fontsize=14)
     ax3.set_title('C', loc='left', fontweight='bold', fontsize=14)
-    plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9, wspace=10, hspace=0.8)
+    plt.subplots_adjust(wspace=20, hspace=0.8)
     plt.savefig('Paper fig R2.png', bbox_inches='tight', dpi=600)
     return
     

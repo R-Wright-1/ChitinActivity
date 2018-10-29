@@ -81,3 +81,4 @@ for b in range(3):
 fnc.plot_all(all_means, all_errors, all_days, highest_means, highest_errors)
 fnc.plot_normalised_only(all_means, all_errors, all_days, highest_means, highest_errors)
 fnc.plot_normalised_only_broken_axes(all_means, all_errors, all_days, highest_means, highest_errors)
+fnc.plot_normalised_3_only(all_means, all_errors, all_days, highest_means, highest_errors)

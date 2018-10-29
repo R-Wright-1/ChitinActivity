@@ -225,8 +225,9 @@ def plot_all(all_means, all_errors, total_days, highest_means, highest_errors):
     colors = ['#6633FF', '#990033', '#006699']
     fig = plt.figure(figsize=(8.27, 5)) 
     ax1 = plt.subplot(221, label='A')
-    ax2, ax3, ax4 = plt.subplot(222, sharex=ax1, label='B'), plt.subplot(223, sharex=ax1, label='C'), plt.subplot(224, sharex=ax1, label='D')
-    fig.text(0.5, 0.00, 'Days', ha='center')
+    ax2, ax3 = plt.subplot(222, sharex=ax1, label='B'), plt.subplot(223, sharex=ax1, label='C')
+    #ax4 = plt.subplot(224, sharex=ax1, label='D')
+    #fig.text(0.5, 0.00, 'Days', ha='center')
     fig.text(-0.01, 0.5, r'Chitinase $\mu$M day$^{-1}$', va='center', rotation='vertical')
     ax1.set_xlim([xmin, xmax])
     markers = ['^', 'o', '*']
@@ -248,9 +249,10 @@ def plot_all(all_means, all_errors, total_days, highest_means, highest_errors):
             nnew_c.append(new_c[a][1])
             nnew_ce.append(new_ce[a][1])
             new_norm.append(new_num)
-        axes[d].errorbar(ds[d], nnew_c, yerr=nnew_ce, marker=markers[d], linestyle='--', markersize=5, color=colors[d])
-        axes[d].errorbar(ds[d], nnew_s, yerr=nnew_se, marker=markers[d], linestyle='-', markersize=5, color=colors[d])
         label = 'Replicate '+str(d+1)
+        axes[d].errorbar(ds[d], nnew_c, yerr=nnew_ce, marker=markers[d], linestyle='--', markersize=5, color=colors[d], linewidth=1, markeredgecolor='k', capsize=2)
+        axes[d].errorbar(ds[d], nnew_s, yerr=nnew_se, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, linewidth=1, markeredgecolor='k', capsize=2)
+        #label = 'Replicate '+str(d+1)
         regr = make_pipeline(PolynomialFeatures(2), LinearRegression())
         with open('Regression '+str(d)+'.csv', 'w') as f:
             writer = csv.writer(f)
@@ -260,31 +262,36 @@ def plot_all(all_means, all_errors, total_days, highest_means, highest_errors):
         df = pd.read_csv('Regression '+str(d)+'.csv')
         regr.fit(df[['X']], df[['Y']])
         y_pred = regr.predict(df[['X']])
-        ax4.plot(ds[d], y_pred, '-.', color=colors[d])
-        ax4.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label)
-    ax1.set_title('A', loc='left'), ax2.set_title('B', loc='left'), ax3.set_title('C', loc='left'), ax4.set_title('D', loc='left')
-    ax1.plot([xmin, xmax], [0, 0], 'k--')
-    ax2.plot([xmin, xmax], [0, 0], 'k--')
-    ax3.plot([xmin, xmax], [0, 0], 'k--')
-    ax4.plot([xmin, xmax], [0, 0], 'k--')
-    ax4.legend(bbox_to_anchor=(0.4, 1), frameon=False, numpoints=1, handlelength=0)
+        #ax4.plot(ds[d], y_pred, '-.', color=colors[d])
+        #ax4.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label)
+    ax1.set_title('A', loc='left', weight='bold'), ax2.set_title('B', loc='left', weight='bold'), ax3.set_title('C', loc='left', weight='bold')#, ax4.set_title('D', loc='left')
+    ax1.plot([xmin, xmax], [0, 0], 'k--', linewidth=1, markeredgecolor='k')
+    ax2.plot([xmin, xmax], [0, 0], 'k--', linewidth=1, markeredgecolor='k')
+    ax3.plot([xmin, xmax], [0, 0], 'k--', linewidth=1, markeredgecolor='k')
+    #ax4.plot([xmin, xmax], [0, 0], 'k--')
+    #ax3.legend(bbox_to_anchor=(1, 1), frameon=False, numpoints=1, handlelength=0)
     ax1.tick_params(axis='both', which='both', length=0)
     ax2.tick_params(axis='both', which='both', length=0)
     ax3.tick_params(axis='both', which='both', length=0)
-    ax4.tick_params(axis='both', which='both', length=0)
-    plt.setp(ax1.get_xticklabels(), visible=False)
-    plt.setp(ax2.get_xticklabels(), visible=False)
+    ax1.set_xlabel('Days')
+    ax2.set_xlabel('Days')
+    ax3.set_xlabel('Days')
+    #ax4.tick_params(axis='both', which='both', length=0)
+    #plt.setp(ax1.get_xticklabels(), visible=False)
+    #plt.setp(ax2.get_xticklabels(), visible=False)
     plt.xticks([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50])
     plt.tight_layout()
     plt.savefig('All presentation.pdf', bbox_inches='tight')
+    plt.savefig('All presentation.png', bbox_inches='tight', dpi=600)
     plt.close()
     
     xmin, xmax = 0, 51
     fig = plt.figure(figsize=(8.27, 5)) 
     colors = ['#6633FF', '#990033', '#006699']
     ax1 = plt.subplot(221, label='A')
-    ax2, ax3, ax4 = plt.subplot(222, sharex=ax1, label='B'), plt.subplot(223, sharex=ax1, label='C'), plt.subplot(224, sharex=ax1, label='D')
-    fig.text(0.5, 0.00, 'Days', ha='center')
+    ax2, ax3 = plt.subplot(222, sharex=ax1, label='B'), plt.subplot(223, sharex=ax1, label='C')
+    #ax4 = plt.subplot(224, sharex=ax1, label='D')
+    #fig.text(0.5, 0.00, 'Days', ha='center')
     fig.text(-0.01, 0.5, r'Chitinase $\mu$M day$^{-1}$', va='center', rotation='vertical')
     ax1.set_xlim([xmin, xmax])
     markers = ['^', 'o', '*']
@@ -308,8 +315,8 @@ def plot_all(all_means, all_errors, total_days, highest_means, highest_errors):
             nnew_ce.append(new_ce[a][1])
             new_norm.append(new_num)
         returning_days.append(new_days)
-        axes[d].errorbar(ds[d], nnew_c, yerr=nnew_ce, marker=markers[d], linestyle='--', markersize=5, color=colors[d])
-        axes[d].errorbar(ds[d], nnew_s, yerr=nnew_se, marker=markers[d], linestyle='-', markersize=5, color=colors[d])
+        axes[d].errorbar(ds[d], nnew_c, yerr=nnew_ce, marker=markers[d], linestyle='--', markersize=5, color=colors[d], linewidth=1, markeredgecolor='k', capsize=2)
+        axes[d].errorbar(ds[d], nnew_s, yerr=nnew_se, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label='Replicate '+str(d+1), linewidth=1, markeredgecolor='k', capsize=2)
         regr = make_pipeline(PolynomialFeatures(2), LinearRegression())
         with open('Regression highest '+str(d)+'.csv', 'w') as f:
             writer = csv.writer(f)
@@ -319,23 +326,27 @@ def plot_all(all_means, all_errors, total_days, highest_means, highest_errors):
         df = pd.read_csv('Regression highest '+str(d)+'.csv')
         regr.fit(df[['X']], df[['Y']])
         y_pred = regr.predict(df[['X']])
-        ax4.plot(ds[d], y_pred, '-.', color=colors[d])
-        ax4.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label='Replicate '+str(d+1))
-    ax1.set_title('A', loc='left'), ax2.set_title('B', loc='left'), ax3.set_title('C', loc='left'), ax4.set_title('D', loc='left')
-    ax1.plot([xmin, xmax], [0, 0], 'k--')
-    ax2.plot([xmin, xmax], [0, 0], 'k--')
-    ax3.plot([xmin, xmax], [0, 0], 'k--')
-    ax4.plot([xmin, xmax], [0, 0], 'k--')
-    ax4.legend(bbox_to_anchor=(0.4, 1), frameon=False, numpoints=1, handlelength=0)
+        #ax4.plot(ds[d], y_pred, '-.', color=colors[d])
+        #ax4.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label='Replicate '+str(d+1))
+    ax1.set_title('A', loc='left', weight='bold'), ax2.set_title('B', loc='left', weight='bold'), ax3.set_title('C', loc='left', weight='bold')#, ax4.set_title('D', loc='left')
+    ax1.plot([xmin, xmax], [0, 0], 'k--', linewidth=1)
+    ax2.plot([xmin, xmax], [0, 0], 'k--', linewidth=1)
+    ax3.plot([xmin, xmax], [0, 0], 'k--', linewidth=1)
+    #ax4.plot([xmin, xmax], [0, 0], 'k--')
+    #ax3.legend(bbox_to_anchor=(0.4, 1), frameon=False, numpoints=1, handlelength=0)
     ax1.tick_params(axis='both', which='both', length=0)
     ax2.tick_params(axis='both', which='both', length=0)
     ax3.tick_params(axis='both', which='both', length=0)
-    ax4.tick_params(axis='both', which='both', length=0)
-    plt.setp(ax1.get_xticklabels(), visible=False)
-    plt.setp(ax2.get_xticklabels(), visible=False)
+    ax1.set_xlabel('Days')
+    ax2.set_xlabel('Days')
+    ax3.set_xlabel('Days')
+    #ax4.tick_params(axis='both', which='both', length=0)
+    #plt.setp(ax1.get_xticklabels(), visible=False)
+    #plt.setp(ax2.get_xticklabels(), visible=False)
     plt.xticks([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50])
     plt.tight_layout()
     plt.savefig('All highest presentation.pdf', bbox_inches='tight')
+    plt.savefig('All highest presentation.png', bbox_inches='tight', dpi=600)
     plt.close()
     return
     
@@ -365,14 +376,14 @@ def plot_normalised_only(all_means, all_errors, total_days, highest_means, highe
         est = sm.OLS(df[['Y']], y_pred)
         pval =  est.fit().f_pvalue
         r2 = est.fit().rsquared
-        ax1.plot(ds[d], y_pred, '-.', color=colors[d])
+        ax1.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
         label = 'Replicate '+str(d+1)
         label2 = r'$r^2$'+'=%.2f'%r2
         label2 += ', '+r'$p$'+'=%.2f'%pval
-        ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7)
-        ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7)
-    ax1.plot([xmin, xmax], [0, 0], 'k--')
-    legend = ax1.legend(bbox_to_anchor=(0.28, 1), frameon=False, numpoints=1, handlelength=0)
+        ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7, linewidth=1, markeredgecolor='k', capsize=2)
+        ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7, linewidth=1, markeredgecolor='k', capsize=2)
+    ax1.plot([xmin, xmax], [0, 0], 'k--', linewidth=1, markeredgecolor='k')
+    legend = ax1.legend(loc='upper left', frameon=False, numpoints=1, handlelength=0)
     t1, t2, t3 = legend.get_texts()[1], legend.get_texts()[3], legend.get_texts()[5]
     for t in [t1, t2, t3]:
         t.set_fontsize(8)
@@ -380,7 +391,7 @@ def plot_normalised_only(all_means, all_errors, total_days, highest_means, highe
     ax1.set_xlim([xmin, xmax])
     ax1.set_xlabel('Days')
     ax1.set_ylabel(r'Chitinase $\mu$M day$^{-1}$')
-    ax1.set_title('A', loc='left')
+    ax1.set_title('A', loc='left', weight='bold')
     plt.tight_layout()
     plt.savefig('Presentation normalised.pdf', bbox_inches='tight')
     plt.close()
@@ -402,14 +413,14 @@ def plot_normalised_only(all_means, all_errors, total_days, highest_means, highe
         est = sm.OLS(df[['Y']], y_pred)
         pval =  est.fit().f_pvalue
         r2 = est.fit().rsquared
-        ax1.plot(ds[d], y_pred, '-.', color=colors[d])
+        ax1.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
         label = 'Replicate '+str(d+1)
         label2 = r'$r^2$'+'=%.2f'%r2
         label2 += ', '+r'$p$'+'=%.2f'%pval
-        ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7)
-        ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7)
-        ax1.plot(ds[d], y_pred, '-.', color=colors[d])
-    legend = ax1.legend(bbox_to_anchor=(0.28, 1), frameon=False, numpoints=1, handlelength=0)
+        ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7, linewidth=1, markeredgecolor='k', capsize=2)
+        ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7, linewidth=1, markeredgecolor='k', capsize=2)
+        ax1.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
+    legend = ax1.legend(loc='upper left', frameon=False, numpoints=1, handlelength=0)
     t1, t2, t3 = legend.get_texts()[1], legend.get_texts()[3], legend.get_texts()[5]
     for t in [t1, t2, t3]:
         t.set_fontsize(8)
@@ -417,7 +428,7 @@ def plot_normalised_only(all_means, all_errors, total_days, highest_means, highe
     plt.xticks([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50])
     ax1.set_xlabel('Days')
     ax1.set_ylabel(r'Chitinase $\mu$M day$^{-1}$')
-    ax1.set_title('B', loc='left')
+    ax1.set_title('B', loc='left', weight='bold')
     plt.tight_layout()
     plt.savefig('Presentation normalised highest.pdf', bbox_inches='tight')
     plt.close()
@@ -427,13 +438,14 @@ def plot_normalised_only_broken_axes(all_means, all_errors, total_days, highest_
     os.chdir(bdir+figures)
     ds = [[2, 5, 8, 11, 15, 19, 26, 34, 42, 50], [2, 5, 11, 18, 26, 34, 42, 50], [2, 4, 6, 8, 10, 12, 14, 17, 20, 23, 26, 29, 32, 35, 39, 44, 50]]
     xmin, xmax = 0, 51
+    f = plt.figure(figsize=(12,4))
     colors = ['#6633FF', '#990033', '#006699']
     markers = ['^', 'o', '*']
-    f, (ax2, ax1) = plt.subplots(2, 1, sharex=True)
-    ax1 = plt.subplot2grid((2, 1), (0, 0), rowspan=1)
-    ax2 = plt.subplot2grid((2, 1), (1, 0), rowspan=1)
-    ax1 = plt.subplot(211)
-    ax2 = plt.subplot(212, sharex=ax1)
+    #f, (ax2, ax1) = plt.subplots(2, 1, sharex=True)
+    #ax1 = plt.subplot2grid((2, 1), (0, 0), rowspan=1)
+    #ax2 = plt.subplot2grid((2, 1), (1, 0), rowspan=1)
+    ax1 = plt.subplot(221)
+    ax2 = plt.subplot(223, sharex=ax1)
     ax2.set_ylim(-1, 7)
     ax1.set_ylim(7, 30)
     ax1.spines['bottom'].set_visible(False)
@@ -460,42 +472,43 @@ def plot_normalised_only_broken_axes(all_means, all_errors, total_days, highest_
         est = sm.OLS(df[['Y']], y_pred)
         pval =  est.fit().f_pvalue
         r2 = est.fit().rsquared
-        ax1.plot(ds[d], y_pred, '-.', color=colors[d])
-        ax2.plot(ds[d], y_pred, '-.', color=colors[d])
+        ax1.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
+        ax2.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
         label = 'Replicate '+str(d+1)
         label2 = r'$r^2$'+'=%.2f'%r2
         label2 += ', '+r'$p$'+'=%.2f'%pval
-        ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7)
-        ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7)
-        ax2.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], alpha=0.7)
-        ax2.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], alpha=0.7)
-    ax2.plot([xmin, xmax], [0, 0], 'k--')
-    legend = ax1.legend(bbox_to_anchor=(0.26, 1), frameon=False, numpoints=1, handlelength=0)
+        ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7, linewidth=1, markeredgecolor='k')
+        ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7, linewidth=1, markeredgecolor='k')
+        ax2.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], alpha=0.7, linewidth=1, markeredgecolor='k')
+        ax2.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], alpha=0.7, linewidth=1, markeredgecolor='k')
+    ax2.plot([xmin, xmax], [0, 0], 'k--', linewidth=1, markeredgecolor='k')
+    legend = ax1.legend(loc='upper left', frameon=False, numpoints=1, handlelength=0)
     t1, t2, t3 = legend.get_texts()[1], legend.get_texts()[3], legend.get_texts()[5]
     for t in [t1, t2, t3]:
         t.set_fontsize(8)
     d = 0.015
     kwargs = dict(transform=ax1.transAxes, color='k', clip_on=False)
-    ax1.plot((-d, +d), (-d, +d), **kwargs)
-    ax1.plot((1-d, 1+d), (-d, +d), **kwargs)
+    ax1.plot((-d, +d), (-d, +d), **kwargs, linewidth=1)
+    ax1.plot((1-d, 1+d), (-d, +d), **kwargs, linewidth=1)
     kwargs.update(transform=ax2.transAxes)
-    ax2.plot((-d, +d), (1-d, 1+d), **kwargs)
-    ax2.plot((1-d, 1+d), (1-d, 1+d), **kwargs)
+    ax2.plot((-d, +d), (1-d, 1+d), **kwargs, linewidth=1)
+    ax2.plot((1-d, 1+d), (1-d, 1+d), **kwargs, linewidth=1)
     plt.xticks([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50])
     ax1.set_xlim([xmin, xmax])
     ax2.set_xlabel('Days')
     f.text(-0.01, 0.5, r'Chitinase $\mu$M day$^{-1}$', va='center', rotation='vertical')
-    ax1.set_title('A', loc='left')
+    ax1.set_title('A', loc='left', weight='bold')
     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.05, hspace=None)
     plt.tight_layout()
-    plt.savefig('Presentation normalised broken axes.pdf', bbox_inches='tight')
-    plt.close()
+    #plt.savefig('Presentation normalised broken axes.pdf', bbox_inches='tight')
+    #plt.savefig('Presentation normalised broken axes.png', bbox_inches='tight', dpi=600)
+    #plt.close()
     
-    f, (ax2, ax1) = plt.subplots(2, 1, sharex=True)
-    ax1 = plt.subplot2grid((2, 1), (0, 0), rowspan=1)
-    ax2 = plt.subplot2grid((2, 1), (1, 0), rowspan=1)
-    ax1 = plt.subplot(211)
-    ax2 = plt.subplot(212, sharex=ax1)
+    #f, (ax2, ax1) = plt.subplots(2, 1, sharex=True)
+    #ax1 = plt.subplot2grid((2, 1), (0, 0), rowspan=1)
+    #ax2 = plt.subplot2grid((2, 1), (1, 0), rowspan=1)
+    ax1 = plt.subplot(222)
+    ax2 = plt.subplot(224, sharex=ax1)
     ax2.set_ylim(-1, 15)
     ax1.set_ylim(15, 90)
     ax1.spines['bottom'].set_visible(False)
@@ -519,35 +532,118 @@ def plot_normalised_only_broken_axes(all_means, all_errors, total_days, highest_
         est = sm.OLS(df[['Y']], y_pred)
         pval =  est.fit().f_pvalue
         r2 = est.fit().rsquared
-        ax1.plot(ds[d], y_pred, '-.', color=colors[d])
-        ax2.plot(ds[d], y_pred, '-.', color=colors[d])
+        ax1.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
+        ax2.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
         label = 'Replicate '+str(d+1)
         label2 = r'$r^2$'+'=%.2f'%r2
         label2 += ', '+r'$p$'+'=%.2f'%pval
-        ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7)
-        ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7)
-        ax1.plot(ds[d], y_pred, '-.', color=colors[d])
-        ax2.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7)
-        ax2.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7)
-        ax2.plot(ds[d], y_pred, '-.', color=colors[d])
-    legend = ax1.legend(bbox_to_anchor=(0.26, 1), frameon=False, numpoints=1, handlelength=0)
+        ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7, linewidth=1, markeredgecolor='k')
+        ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7, linewidth=1, markeredgecolor='k')
+        ax1.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
+        ax2.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label=label, alpha=0.7, linewidth=1, markeredgecolor='k')
+        ax2.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7, linewidth=1, markeredgecolor='k')
+        ax2.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
+    ax2.plot([xmin, xmax], [0, 0], 'k--', linewidth=1, markeredgecolor='k')    
+    legend = ax1.legend(loc='upper left', frameon=False, numpoints=1, handlelength=0)
     t1, t2, t3 = legend.get_texts()[1], legend.get_texts()[3], legend.get_texts()[5]
     for t in [t1, t2, t3]:
         t.set_fontsize(8)
     d = 0.015
     kwargs = dict(transform=ax1.transAxes, color='k', clip_on=False)
-    ax1.plot((-d, +d), (-d, +d), **kwargs)
-    ax1.plot((1-d, 1+d), (-d, +d), **kwargs)
+    ax1.plot((-d, +d), (-d, +d), **kwargs, linewidth=1)
+    ax1.plot((1-d, 1+d), (-d, +d), **kwargs, linewidth=1)
     kwargs.update(transform=ax2.transAxes)
-    ax2.plot((-d, +d), (1-d, 1+d), **kwargs)
-    ax2.plot((1-d, 1+d), (1-d, 1+d), **kwargs)
+    ax2.plot((-d, +d), (1-d, 1+d), **kwargs, linewidth=1)
+    ax2.plot((1-d, 1+d), (1-d, 1+d), **kwargs, linewidth=1)
     plt.xticks([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50])
     ax1.set_xlim([xmin, xmax])
     ax2.set_xlabel('Days')
     f.text(-0.01, 0.5, r'Chitinase $\mu$M day$^{-1}$', va='center', rotation='vertical')
     plt.xticks([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50])
-    ax1.set_title('B', loc='left')
+    ax1.set_title('B', loc='left', weight='bold')
     plt.tight_layout()
-    plt.savefig('Presentation normalised highest broken axes.pdf', bbox_inches='tight')
+    plt.savefig('Presentation broken axes.pdf', bbox_inches='tight')
+    plt.savefig('Presentation broken axes.png', bbox_inches='tight', dpi=600)
+    plt.close()
+    return
+
+def plot_normalised_3_only(all_means, all_errors, total_days, highest_means, highest_errors):
+    os.chdir(bdir+figures)
+    ds = [[2, 5, 8, 11, 15, 19, 26, 34, 42, 50], [2, 5, 11, 18, 26, 34, 42, 50], [2, 4, 6, 8, 10, 12, 14, 17, 20, 23, 26, 29, 32, 35, 39, 44, 50]]
+    xmin, xmax = 0, 51
+    f = plt.figure(figsize=(6,4))
+    colors = ['#6633FF', '#990033', '#006699']
+    markers = ['^', 'o', '*']
+    #f, (ax2, ax1) = plt.subplots(2, 1, sharex=True)
+    #ax1 = plt.subplot2grid((2, 1), (0, 0), rowspan=1)
+    #ax2 = plt.subplot2grid((2, 1), (1, 0), rowspan=1)
+    ax1 = plt.subplot(111)
+    regr = make_pipeline(PolynomialFeatures(2), LinearRegression())
+    all_norm = []
+    for d in range(len(all_means)):
+        if d == 1:
+            new_c = heapq.nsmallest(len(total_days[d]), zip(total_days[d], all_means[d][0]))
+            new_s = heapq.nsmallest(len(total_days[d]), zip(total_days[d], all_means[d][1]))
+            new_days, new_norm = [], []
+            days = 0
+            for a in range(len(new_c)):
+                days+= new_c[a][0]
+                new_days.append(days)
+                new_num = (new_s[a][1]-new_c[a][1])
+                new_norm.append(new_num)
+            all_norm.append(new_norm)
+            df = pd.read_csv('Regression '+str(d)+'.csv')
+            regr.fit(df[['X']], df[['Y']])
+            y_pred = regr.predict(df[['X']])
+            est = sm.OLS(df[['Y']], y_pred)
+            pval =  est.fit().f_pvalue
+            r2 = est.fit().rsquared
+            ax1.plot(ds[d], y_pred, '-.', color=colors[d], linewidth=1, markeredgecolor='k')
+            label = 'Replicate '+str(d+1)
+            label2 = r'$r^2$'+'=%.2f'%r2
+            label2 += ', '+r'$p$'+'=%.2f'%pval
+            ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color=colors[d], label='Means', alpha=0.7, linewidth=1, markeredgecolor='k')
+            ax1.errorbar(ds[d], new_norm, linestyle='-', color=colors[d], label=label2, alpha=0.7, linewidth=1, markeredgecolor='k')
+            ax1.plot([xmin, xmax], [0, 0], 'k--', linewidth=1, markeredgecolor='k')
+    plt.xticks([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50])
+    ax1.set_xlim([xmin, xmax])
+    ax1.set_xlabel('Days')
+    ax1.set_ylabel(r'Chitinase $\mu$M day$^{-1}$')
+    #f.text(-0.01, 0.5, r'Chitinase $\mu$M day$^{-1}$', va='center', rotation='vertical')
+    #plt.savefig('Presentation normalised broken axes.pdf', bbox_inches='tight')
+    #plt.savefig('Presentation normalised broken axes.png', bbox_inches='tight', dpi=600)
+    #plt.close()
+    
+    #f, (ax2, ax1) = plt.subplots(2, 1, sharex=True)
+    #ax1 = plt.subplot2grid((2, 1), (0, 0), rowspan=1)
+    #ax2 = plt.subplot2grid((2, 1), (1, 0), rowspan=1)
+    for d in range(len(all_means)):
+        if d == 1:
+            new_c = heapq.nsmallest(len(total_days[d]), zip(total_days[d], highest_means[d][0]))
+            new_s = heapq.nsmallest(len(total_days[d]), zip(total_days[d], highest_means[d][1]))
+            new_days, new_norm = [], []
+            days = 0
+            for a in range(len(new_c)):
+                days+= new_c[a][0]
+                new_days.append(days)
+                new_num = (new_s[a][1]-new_c[a][1])
+                new_norm.append(new_num)
+            df = pd.read_csv('Regression highest '+str(d)+'.csv')
+            regr.fit(df[['X']], df[['Y']])
+            y_pred = regr.predict(df[['X']])
+            est = sm.OLS(df[['Y']], y_pred)
+            pval =  est.fit().f_pvalue
+            r2 = est.fit().rsquared
+            ax1.plot(ds[d], y_pred, '-.', color='#FFD700', linewidth=1, markeredgecolor='k')
+            label = 'Replicate '+str(d+1)
+            label2 = r'$r^2$'+'=%.2f'%r2
+            label2 += ', '+r'$p$'+'=%.2f'%pval
+            ax1.errorbar(ds[d], new_norm, marker=markers[d], linestyle='-', markersize=5, color='#FFD700', label='Highest', alpha=0.7, linewidth=1, markeredgecolor='k')
+            ax1.errorbar(ds[d], new_norm, linestyle='-', color='#FFD700', label=label2, alpha=0.7, linewidth=1, markeredgecolor='k')
+            ax1.plot(ds[d], y_pred, '-.', color='#FFD700', linewidth=1, markeredgecolor='k')
+    legend = ax1.legend(loc='upper left', frameon=False, numpoints=1, handlelength=0)
+    plt.tight_layout()
+    plt.savefig('Presentation broken axes 3 only.pdf', bbox_inches='tight')
+    plt.savefig('Presentation broken axes 3 only.png', bbox_inches='tight', dpi=600)
     plt.close()
     return

@@ -532,11 +532,11 @@ def get_paper_plot(LS, g):
     label2 = r'$r^2$'+'=%.2f'%r2
     label2 += ', '+r'$p$'+'=%.2f'%pval
     ax1.plot(g[0], y_pred, '-.', color=col_l)
-    ax1.plot(g[0], LS[0], color=col_l, marker='o', label=label)
+    ax1.plot(g[0], LS[0], color=col_l, marker='o', label=label, edgecolor='k')
     ax1.plot(g[0], LS[0], color=col_l, label=label2)
     ax1.annotate('B', xy=(19.8, LS[1][-1]), xytext=(18, LS[1][-1]-0.15),arrowprops={'arrowstyle':'->'})
     ax1.text(17, LS[1][-1]-0.22, 'day 2', fontsize=8)
-    ax1.plot(g[1], LS[1], color=col_s, marker='o', label=label)
+    ax1.plot(g[1], LS[1], color=col_s, marker='o', label=label, edgecolor='k')
     with open('For regression short day 2.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(['X', 'Y'])
@@ -561,7 +561,7 @@ def get_paper_plot(LS, g):
     day4[-1] = day4[-1]-diff
     ax1.annotate('B', xy=(19.8, day4[-1]), xytext=(18, day4[-1]-0.15),arrowprops={'arrowstyle':'->'})
     ax1.text(17, day4[-1]-0.22, 'day 4', fontsize=8)
-    ax1.plot(g[1][-2:], day4[-2:], color=col_s, marker='o')
+    ax1.plot(g[1][-2:], day4[-2:], color=col_s, marker='o', edgecolor='k')
     with open('For regression short day 4.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(['X', 'Y'])
@@ -590,8 +590,8 @@ def get_paper_plot(LS, g):
     ge = [g15_re, g15_ge, g20_re, g20_ge]
     colors = ['#66CCFF', '#FF0099']
     ax3.set_xlim([0, 5])
-    ax3.errorbar(days_20, g[2], yerr=ge[2], color=colors[0], marker='o', label='Treatment 1')
-    ax3.errorbar(days_20, g[3], yerr=ge[3], color=colors[1], marker='o', label='Treatment 2')
+    ax3.errorbar(days_20, g[2], yerr=ge[2], color=colors[0], marker='o', label='Treatment 1', edgecolor='k')
+    ax3.errorbar(days_20, g[3], yerr=ge[3], color=colors[1], marker='o', label='Treatment 2', edgecolor='k')
     ax3.legend(bbox_to_anchor=(0.9, 1), fontsize=8, frameon=False, numpoints=1, handlelength=0)
     ax1.tick_params(axis='both', which='right', length=0)
     ax3.tick_params(axis='both', which='right', length=0)
