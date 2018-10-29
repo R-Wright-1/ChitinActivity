@@ -1,0 +1,82 @@
+Sample_ID,treatment1_daily,treatment2_all_rg_ls,treatment3_all,treatment4_controls
+C1,,,,C1
+C2,,,,C2
+K1,,,,K1
+K3,,,,K3
+negplt3H10,,,,neg1
+negplt3H11,,,,neg2
+negplt4G10,,,,neg3
+negplt4G11,,,,neg4
+negplt4G7,,,,neg5
+negplt4G8,,,,neg6
+negplt4G9,,,,neg7
+negplt4H1,,,,neg8
+negplt4H10,,,,neg9
+negplt4H11,,,,neg10
+negplt4H12,,,,neg11
+negplt4H2,,,,neg12
+negplt4H3,,,,neg13
+negplt4H4,,,,neg14
+negplt4H5,,,,neg15
+negplt4H6,,,,neg16
+negplt4H7,,,,neg17
+negplt4H8,,,,neg18
+negplt4H9,,,,neg19
+L0_7,,LG,L0_G,L0_G
+L0_8,,LG,L0_G,L0_G
+L0_9,,LG,L0_G,L0_G
+L1_7,,LG,L1_G,L1_G
+L8_9,,LG,L8_G,L8_G
+L9_7,,LG,L9_G,L9_G
+L10_7,,LG,L10_G,L10_G
+L10_8,,LG,L10_G,L10_G
+L10_9,,LG,L10_G,L10_G
+L13_7,,LG,L13_G,L13_G
+L14_8,,LG,L14_G,L14_G
+L14_9,,LG,L14_G,L14_G
+L17_8,,LG,L17_G,L17_G
+L17_9,,LG,L17_G,L17_G
+L19_8,,LG,L19_G,L19_G
+L20_7,,LG,L20_G,L20_G
+L20_8,,LG,L20_G,L20_G
+L20_9,,LG,L20_G,L20_G
+S16_4,,SG,S16_G,S16_G
+S16_5,,SG,S16_G,S16_G
+S16_6,,SG,S16_G,S16_G
+S17_4,,SG,S17_G,S17_G
+S17_5,,SG,S17_G,S17_G
+S17_6,,SG,S17_G,S17_G
+S18_4,,SG,S18_G,S18_G
+S18_5,,SG,S18_G,S18_G
+S18_6,,SG,S18_G,S18_G
+S19_4,,SG,S19_G,S19_G
+S19_5,,SG,S19_G,S19_G
+S19_6,,SG,S19_G,S19_G
+S20_1_4,Day 1,,S20_1_G,S20_1_G
+S20_1_5,Day 1,,S20_1_G,S20_1_G
+S20_1_6,Day 1,,S20_1_G,S20_1_G
+S20_2_4,Day 2,,S20_2_G,S20_2_G
+S20_2_5,Day 2,,S20_2_G,S20_2_G
+S20_2_6,Day 2,,S20_2_G,S20_2_G
+S20_3_4,Day 3,,S20_3_G,S20_3_G
+S20_3_5,Day 3,,S20_3_G,S20_3_G
+S20_3_6,Day 3,,S20_3_G,S20_3_G
+S20_4_4,Day 4,SG,S20_4_G,S20_4_G
+S20_4_5,Day 4,SG,S20_4_G,S20_4_G
+S20_4_6,Day 4,SG,S20_4_G,S20_4_G
+L0_B,,LR,L0_R,L0_R
+L1_B,,LR,L1_R,L1_R
+L8_B,,LR,L8_R,L8_R
+L9_B,,LR,L9_R,L9_R
+L10_B,,LR,L10_R,L10_R
+L11_B,,LR,L11_R,L11_R
+L12_B,,LR,L12_R,L12_R
+L13_B,,LR,L13_R,L13_R
+L14_B,,LR,L14_R,L14_R
+L18_B,,LR,L18_R,L18_R
+L20_B,,LR,L20_R,L20_R
+S16_A,,SR,S16_R,S16_R
+S17_A,,SR,S17_R,S17_R
+S20_1_A,,,S20_1_R,S20_1_R
+S20_2_A,,,S20_2_R,S20_2_R
+S20_4_A,,SR,S20_4_R,S20_4_R
