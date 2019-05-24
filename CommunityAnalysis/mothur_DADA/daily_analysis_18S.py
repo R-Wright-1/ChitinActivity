@@ -164,7 +164,7 @@ def barplot(fn, tax, lim, ax, alpha):
         ax.bar(x, data[j], color=colors[j], bottom=bottom[j-1], label=taxa[j], alpha=alpha, edgecolor='k')
     ax.set_ylim([0, 100])
     if ax == l16S:
-        ax.legend(bbox_to_anchor=(2.23, 1.01), fontsize=7)
+        ax.legend(bbox_to_anchor=(2.12, 1.01), fontsize=7)
     elif ax == l18S:
         ax.legend(bbox_to_anchor=(2.12, 1.01), fontsize=7)
     ax.set_xlim([0.5, 4.5])
@@ -314,8 +314,8 @@ simper(sim_18S_DADA, tax_18S_DADA, 5, s16S, [1, 2, 3, 4], [0.5, 4.5], [0, 100], 
 
 barplot(fn_18S_DADA, tax_18S_DADA, 1, l16S, 0.8)
 
-l16S.text(-0.98, 99, 'A', fontsize=16, fontweight='bold', color='k')#, bbox=dict(facecolor='white', edgecolor='white'))
-l16S.text(-0.98, -16, 'B', fontsize=16, fontweight='bold', color='k')
+l16S.text(-0.98, 99, 'C', fontsize=16, fontweight='bold', color='k')#, bbox=dict(facecolor='white', edgecolor='white'))
+l16S.text(-0.98, -16, 'D', fontsize=16, fontweight='bold', color='k')
 l16S.set_title('DADA2 analysis', fontsize=12)
 l18S.set_title('Mothur analysis', fontsize=12)
 
@@ -488,7 +488,7 @@ def barplot_mothur(fn, tax, lim, ax, alpha):
     for j in range(1, data.shape[0]):
         ax.bar(x, data[j], color=colors[j], bottom=bottom[j-1], label=otus[j], alpha=alpha, edgecolor='k')
     ax.set_ylim([0, 100])
-    ax.legend(bbox_to_anchor=(1.0, 1.01), fontsize=7)
+    ax.legend(bbox_to_anchor=(2.23, 1.01), fontsize=7)
     plt.setp(ax, xticks=[1, 2, 3, 4], xticklabels=[1, 2, 3, 4])
     ax.set_xlim([0.5, 4.5])
     return

@@ -145,7 +145,7 @@ simper.pretty = function(x, metrics, interesting, perc_cutoff, low_cutoff, low_v
 
       t[,1]=name
 
-      write.table(t,file=paste(output_name,sep=""), append=TRUE, sep=",", col.names = FALSE)
+      write.table(t,file=paste(output_name,'_simper.csv',sep=""), append=TRUE, sep=",", col.names = FALSE)
 
     }}
 
@@ -173,7 +173,7 @@ simper.pretty = function(x, metrics, interesting, perc_cutoff, low_cutoff, low_v
 
   }
 
-  write.csv(y,file=paste(output_name,'_clean_simper.csv', sep=''))
+  write.csv(y,file=paste(output_name,'_simper.csv', sep=''))
 
 }
 

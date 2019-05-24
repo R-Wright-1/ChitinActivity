@@ -1,7 +1,7 @@
 import csv
 
 #run this script first!
-meta = '16S_metadata.csv'
+meta = '18S_metadata.csv'
 tax_seqs = 'taxa_and_seqs.csv'
 
 def get_meta_treatments(fn, table):

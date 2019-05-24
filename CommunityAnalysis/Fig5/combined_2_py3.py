@@ -223,6 +223,7 @@ def plot_nmds(fn, fnc, ax):
         ax.scatter(npos[b+count,0], npos[b+count,1], marker='1', color='k')
         if b == 0:
             ax.scatter(npos[b+count,0], npos[b+count,1], marker='1', color='k', label='Controls')"""
+    linestyles = ['-', '--', '-.', ':', '']
     for z in range(len(gens)):
         nstd = 2
         x1, y1 = x[z], y[z]
@@ -230,7 +231,7 @@ def plot_nmds(fn, fnc, ax):
         vals, vecs = eigsorted(cov)
         theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))
         w, h = 2 * nstd * np.sqrt(vals)
-        ell = Ellipse(xy=(np.mean(x1), np.mean(y1)),width=w, height=h,angle=theta, color=colors[z])     
+        ell = Ellipse(xy=(np.mean(x1), np.mean(y1)),width=w, height=h,angle=theta, color=colors[z], linestyle=linestyles[z], label=labels[z])     
         ell.set_facecolor('none')
         ax.add_artist(ell)
     ax.set_xlabel('nMDS 1', fontsize=14)
@@ -262,14 +263,28 @@ ax1.text(-80, -95, 'B', fontsize=18, weight='bold')
 
 colors, labels = plot_nmds('16S_all.csv', '16S_controls.csv', ax1)
 colors, labels = plot_nmds('18S_all.csv', '18S_controls.csv', ax2)
-ax2.legend(bbox_to_anchor=(1.9, 1.03), scatterpoints=1, fontsize=14)
+
+l1 = ax2.plot([0,1], [0,1], color=colors[0], linestyle=linestyles[0], label=labels[0])
+l2 = ax2.plot([0,1], [0,1], color=colors[1], linestyle=linestyles[1], label=labels[1])
+l3 = ax2.plot([0,1], [0,1], color=colors[2], linestyle=linestyles[2], label=labels[2])
+l4 = ax2.plot([0,1], [0,1], color=colors[3], linestyle=linestyles[3], label=labels[3])
+l5 = ax2.plot([0,1], [0,1], color='white')
+
+handles, labels = ax2.get_legend_handles_labels()
+ax2.legend([handles[4], handles[0], handles[5], handles[1], handles[6], handles[2], handles[7], handles[3]], ['Positive selection', 'nine-day', 'Positive selection', 'four-day', 'Random selection', 'nine-day', 'Random selection', 'four-day'], bbox_to_anchor=(1.05, 1.03), scatterpoints=1, fontsize=14)
+
+#ax2.legend(bbox_to_anchor=(1.9, 1.03), scatterpoints=1, fontsize=14)
 
 ax2.set_ylabel('')
 ax1.set_title('16S rRNA gene', fontsize=16)
 ax2.set_title('18S rRNA gene', fontsize=16)
 
 plt.subplots_adjust(hspace=0.5, wspace=0.4)
-plt.savefig('LS_RG_all_py3.png', bbox_inches='tight', dpi=600)
+#plt.savefig('LS_RG_all_py3.png', bbox_inches='tight', dpi=600)
+plt.savefig('Figure 4.tiff', bbox_inches='tight', dpi=300)
+plt.savefig('Figure 4.png', bbox_inches='tight', dpi=300)
+plt.savefig('Figure 4.jpg', bbox_inches='tight', dpi=300)
+plt.savefig('Figure 4.pdf', bbox_inches='tight', dpi=300)
 #plt.close()
 
 

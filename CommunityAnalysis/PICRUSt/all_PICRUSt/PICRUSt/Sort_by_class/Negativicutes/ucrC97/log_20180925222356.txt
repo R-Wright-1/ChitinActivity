@@ -1,0 +1,47 @@
+Logging started at 22:23:56 on 25 Sep 2018
+QIIME version: 1.9.1
+
+qiime_config values:
+pick_otus_reference_seqs_fp	/Users/u1560915/anaconda3/envs/qiime1/lib/python2.7/site-packages/qiime_default_reference/gg_13_8_otus/rep_set/97_otus.fasta
+sc_queue	all.q
+pynast_template_alignment_fp	/Users/u1560915/anaconda3/envs/qiime1/lib/python2.7/site-packages/qiime_default_reference/gg_13_8_otus/rep_set_aligned/85_otus.pynast.fasta
+cluster_jobs_fp	start_parallel_jobs.py
+assign_taxonomy_reference_seqs_fp	/Users/u1560915/anaconda3/envs/qiime1/lib/python2.7/site-packages/qiime_default_reference/gg_13_8_otus/rep_set/97_otus.fasta
+torque_queue	friendlyq
+jobs_to_start	1
+denoiser_min_per_core	50
+assign_taxonomy_id_to_taxonomy_fp	/Users/u1560915/anaconda3/envs/qiime1/lib/python2.7/site-packages/qiime_default_reference/gg_13_8_otus/taxonomy/97_otu_taxonomy.txt
+temp_dir	/var/folders/94/m4rk4gx97jg84s3tv_x71yb14khl28/T/
+blastall_fp	blastall
+seconds_to_sleep	1
+
+parameter file values:
+parallel:jobs_to_start	1
+pick_otus:similarity	0.97
+pick_otus:enable_rev_strand_match	True
+
+Input file md5 sums:
+/Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/seqs.fna: e6e026b6d12989d073f6308ecc8dfce9
+/Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/gg_13_5_otus/rep_set/97_otus.fasta: 50b2269712b3738afb41892bed936c29
+/Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/gg_13_5_otus/taxonomy/97_otu_taxonomy.txt: 7e5516794b51d366c3e66e27d148b109
+
+Forcing --suppress_new_clusters as this is closed-reference OTU picking.
+
+Executing commands.
+
+# Pick OTUs command 
+pick_otus.py -i /Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/seqs.fna -o /Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/ucrC97//uclust_ref_picked_otus -r /Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/gg_13_5_otus/rep_set/97_otus.fasta -m uclust_ref --similarity 0.97 --enable_rev_strand_match --suppress_new_clusters
+
+Stdout:
+
+Stderr:
+
+# Make OTU table command 
+make_otu_table.py -i /Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/ucrC97//uclust_ref_picked_otus/seqs_otus.txt -t /Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/gg_13_5_otus/taxonomy/97_otu_taxonomy.txt -o /Users/u1560915/Documents/OneDrive/PhD_Plastic_Oceans/Experiments/MiSeq_Dada/PICRUSt/Sort_by_class/Negativicutes/ucrC97//otu_table.biom 
+
+Stdout:
+
+Stderr:
+
+
+Logging stopped at 22:24:34 on 25 Sep 2018

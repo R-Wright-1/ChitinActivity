@@ -354,6 +354,7 @@ cb1.ax.text(0.05, 0.35, 'Low', fontsize=8, color='gray')
 cb1.ax.text(0.7, 0.35, 'High', fontsize=8, color='w')
 
 fig.subplots_adjust(hspace=200, wspace=0.4)
+plt.savefig('16S and 18S daily '+diversity+'.pdf', bbox_inches='tight', dpi=600)
 plt.savefig('16S and 18S daily '+diversity+'.png', bbox_inches='tight', dpi=600)
 
 #plt.close()

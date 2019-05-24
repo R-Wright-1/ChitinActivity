@@ -324,6 +324,10 @@ def plot_all_means(means, errors, is_high):
     lm, sm = [means[0], means[1], means[2]], [means[4], means[5]]
     #le, se = [errors[0], errors[1], errors[2], errors[3]], [errors[4], errors[5]]
     le, se = [errors[0], errors[1], errors[2]], [errors[4], errors[5]]
+    #print(is_high, 'lm = ', lm)
+    #print(is_high, 'sm = ', sm)
+    #print(is_high, 'le = ', le)
+    #print(is_high, 'se = ', se)
     gens_l, gens_s = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], [15, 16, 17, 18, 19, 20]
     colors_l, colors_s = ['#FFCC00', '#006699', '#CC0000', '#006600'], ['#0099FF', '#CC0099']
     labels = ['Light', 'Dark random', 'Selection (9 day)', 'Strain 6']
@@ -491,6 +495,8 @@ def get_daily():
     for d in [0, 1, 2, 3]:
         g20_r[d] = normalise_community(g20_r[d], g20_s2[d])
         g20_g[d] = normalise_community(g20_g[d], g20_s2[d])
+    print('g20_g =', g20_g)
+    print('g20_r =', g20_r)
     for z in range(len(g15_r)):
         for a in range(30):
             g15_r[z][a] = (g15_r[z][a])
@@ -537,18 +543,19 @@ def get_paper_plot(LS, g):
     est = sm.OLS(df[['Y']], y_pred)
     pval =  est.fit().f_pvalue
     r2 = est.fit().rsquared
-    ax1.plot(g[0], y_pred, '-.', color=col_s, linewidth=1)
+    #ax1.plot(g[0], y_pred, '-.', color=col_s, linewidth=1)
     label='Selection (nine-day)'
     label2 = r'$r^2$'+'=%.2f'%r2
     label2 += ', '+r'$p$'+'=%.2f'%pval
-    ax1.plot(g[0], y_pred, '-.', color=col_l, linewidth=1)
+    #ax1.plot(g[0], y_pred, '-.', color=col_l, linewidth=1)
     ax1.plot(g[0], LS[0], color=col_l, marker='o', label=label, markeredgecolor='k', linewidth=1)
-    ax1.plot(g[0], LS[0], color=col_l, label=label2, linewidth=1)
-    ax1.plot([14, 15, 16], [LS[0][14], g15_g[2]-g15_r[2], LS[0][16]], marker='o', color=col_l, markeredgecolor='k', linewidth=1)
-    ax1.annotate('C', xy=(19.8, LS[1][-1]), xytext=(18, LS[1][-1]-0.15),arrowprops={'arrowstyle':'->'})
-    ax1.text(17.5, LS[1][-1]-0.22, 'day 2', fontsize=8)
+    #ax1.plot(g[0], LS[0], color=col_l, label=label2, linewidth=1)
+    #ax1.plot([14, 15, 16], [LS[0][14], g15_g[2]-g15_r[2], LS[0][16]], marker='o', color=col_l, markeredgecolor='k', linewidth=1)
+    #ax1.annotate('C', xy=(19.8, LS[1][-1]), xytext=(18, LS[1][-1]-0.15),arrowprops={'arrowstyle':'->'})
+    #ax1.text(17.5, LS[1][-1]-0.22, 'day 2', fontsize=8)
     label = 'Selection (four-day)'
-    ax1.plot(g[1], LS[1], color=col_s, marker='o', label=label, markeredgecolor='k', linewidth=1)
+    LS[1][-1] = g20_g[3]-g20_r[3]
+    ax1.plot(g[1], LS[1], color=col_s, marker='^', label=label, markeredgecolor='k', linewidth=1)
     with open('For regression short day 2.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(['X', 'Y'])
@@ -563,17 +570,17 @@ def get_paper_plot(LS, g):
     label2 = r'$r^2$'+'=%.2f'%r2_2day
     label2 += ', '+r'$p$'+'=%.2f'%pval_2day
     label2 += ' (day 2)'
-    ax1.plot(g[1], LS[1], color=col_s, label=label2, linewidth=1)
+    #ax1.plot(g[1], LS[1], color=col_s, label=label2, linewidth=1, markeredgecolor='k')
     do = '#cc5500'
     #do = '#51412d'
-    ax1.plot(g[1], y_pred, '-.', color=do, linewidth=1)
+    #ax1.plot(g[1], y_pred, '-.', color=do, linewidth=1)
     
     day4 = LS[1]
     #diff = (g20_g[1]-g20_r[1])-(g20_g[3]-g20_r[3])
     day4[-1] = g20_g[3]-g20_r[3]
     ax1.annotate('C', xy=(19.8, day4[-1]), xytext=(19, day4[-1]-0.18),arrowprops={'arrowstyle':'->'})
-    ax1.text(18.5, day4[-1]-0.25, 'day 4', fontsize=8)
-    ax1.plot(g[1][-2:], day4[-2:], color=col_s, marker='o', markeredgecolor='k', linewidth=1)
+    #ax1.text(18.5, day4[-1]-0.25, 'day 4', fontsize=8)
+    #ax1.plot(g[1][-2:], day4[-2:], color=col_s, marker='o', markeredgecolor='k', linewidth=1)
     with open('For regression short day 4.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(['X', 'Y'])
@@ -588,37 +595,53 @@ def get_paper_plot(LS, g):
     label3 = r'$r^2$'+'=%.2f'%r2_4day
     label3 += ', '+r'$p$'+'=%.2f'%pval_4day
     label3 += ' (day 4)'
-    ax1.plot(g[1][-2:], day4[-2:], color=col_s, label=label3, linewidth=1)  
-    ax1.plot(g[1], y_pred, '-.', color=do, linewidth=1)    
+    #ax1.plot(g[1][-2:], day4[-2:], color=col_s, label=label3, linewidth=1)  
+    #ax1.plot(g[1], y_pred, '-.', color=do, linewidth=1)    
     
     ax1.annotate('B', xy=(14.8, LS[0][15]), xytext=(13, LS[0][15]-0.1),arrowprops={'arrowstyle':'->'})
-    ax1.text(12.5, LS[0][15]-0.17, 'day 9', fontsize=8)
-    ax1.annotate('B', xy=(14.8, g15_g[2]-g15_r[2]), xytext=(13, g15_g[2]-g15_r[2]-0.05),arrowprops={'arrowstyle':'->'})
-    ax1.text(12.5, g15_g[2]-g15_r[2]-0.1, 'day 4', fontsize=8)
+    #ax1.text(12.5, LS[0][15]-0.17, 'day 9', fontsize=8)
+    #ax1.annotate('B', xy=(14.8, g15_g[2]-g15_r[2]), xytext=(13, g15_g[2]-g15_r[2]-0.05),arrowprops={'arrowstyle':'->'})
+    #ax1.text(12.5, g15_g[2]-g15_r[2]-0.1, 'day 4', fontsize=8)
     
     ax1.legend(loc='upper left', fontsize=8, frameon=False, numpoints=1, handlelength=0)
     ax1.plot([0, 20], [0, 0], 'k--', linewidth=1)
     ax2.plot([0, 10], [0, 0], 'k--', linewidth=1)
     ax3.plot([0, 5], [0, 0], 'k--', linewidth=1)
     ax1.set_xlim([-1, 21])
-    ax1.set_ylim([-0.4, 0.9])
+    ax1.set_ylim([-0.4, 0.3])
     ax1.set_xticks([0, 5, 10, 15, 20])
     days_20 = [1, 2, 3, 4]
     g = [g15_r, g15_g, g20_r, g20_g]
     ge = [g15_re, g15_ge, g20_re, g20_ge]
     colors = ['#66CCFF', '#FF0099']
     ax3.set_xlim([0, 5])
-    ax3.errorbar(days_20, g[2], yerr=ge[2], color=colors[0], marker='o', markeredgecolor='k', capsize=2, linewidth=1)
+    ax3.errorbar(days_20, g[2], yerr=ge[2], color=colors[0], marker='s', markeredgecolor='k', capsize=2, linewidth=1)
     ax3.errorbar(days_20, g[3], yerr=ge[3], color=colors[1], marker='o', markeredgecolor='k', capsize=2, linewidth=1)
     days_15 = [1, 2, 4, 6, 9]
-    ax2.errorbar(days_15, g[0], yerr=ge[0], color=colors[0], marker='o', label='Random selection', markeredgecolor='k', capsize=2, linewidth=1)
+    ax2.errorbar(days_15, g[0], yerr=ge[0], color=colors[0], marker='s', label='Random selection', markeredgecolor='k', capsize=2, linewidth=1)
     ax2.errorbar(days_15, g[1], yerr=ge[1], color=colors[1], marker='o', label='Positive selection', markeredgecolor='k', capsize=2, linewidth=1)
+    
+    #print('sel_20 = ', g[3], 'sel_sd_20 = ', ge[3])
+    #print('ran_20 = ', g[2], 'ran_sd_20 = ', ge[2])
+    
+    #print('sel_15 = ', g[1], 'sel_sd_15 = ', ge[1])
+    #print('ran_15 = ', g[0], 'ran_sd_15 = ', ge[0])
+    
     ax2.tick_params(axis='both', which='right', length=0)
     ax3.tick_params(axis='both', which='right', length=0)
     ax2.legend(loc='upper left', fontsize=8, frameon=False, numpoints=1, handlelength=0)
     ax1.tick_params(axis='both', which='right', length=0)
     ax3.tick_params(axis='both', which='right', length=0)
     ax1.set_ylabel(r'Chitinase $\mu$M day$^{-1}$')
+    
+    ax4 = ax3.twinx()
+    short_good_g20 = [0.219, 0.689, 10.38, 3.646666667]
+    short_good_g20_e = [0.036755952, 0.444635806, 5.191415992, 1.831402013]
+    ax4.errorbar([1,2,3,4], short_good_g20, yerr=short_good_g20_e, linestyle='--', color='g', marker='^', label='DNA conc.', capsize=2, markeredgecolor='k')
+    ax4.legend(loc='upper left', handlelength=0, fontsize=8)
+    ax4.set_ylabel(r'DNA conc. $\mu$g mL$^{-1}$')
+    
+    
     #ax2.set_ylabel(r'Chitinase $\mu$M day$^{-1}$')
     #ax3.set_ylabel(r'Chitinase $\mu$M day$^{-1}$')
     ax1.set_xlabel('Generation')
@@ -632,16 +655,16 @@ def get_paper_plot(LS, g):
     ax2.set_title('B', loc='left', fontweight='bold', fontsize=14)
     ax3.set_title('C', loc='left', fontweight='bold', fontsize=14)
     plt.subplots_adjust(wspace=20, hspace=0.8)
-    plt.savefig('Paper fig R2.png', bbox_inches='tight', dpi=600)
+    plt.savefig('Paper fig R2 Jan 18.png', bbox_inches='tight', dpi=600)
     return
     
-l, dr, dg, s6, drs, dgs, ls, le, ss, se = get_all_data()
-new_means, new_errors = get_means(l, dr, dg, s6, drs, dgs)
-high_means, high_errors, high_all = highest_means(l, dr, dg, s6, drs, dgs)
-plot_standards(ls, le, ss, se)
-LS, g = plot_all_means(new_means, new_errors, 'means')
-plot_all_means(high_means, high_errors, 'high')
-long_means, long_errors = [new_means[0], new_means[1], new_means[2], new_means[3]], [new_errors[0], new_errors[1], new_errors[2], new_errors[3]]
-short_means, short_errors = [new_means[4], new_means[5]], [new_errors[4], new_errors[5]]
-plot_short(short_means, short_errors)
-get_paper_plot(LS, g)
+#l, dr, dg, s6, drs, dgs, ls, le, ss, se = get_all_data()
+#new_means, new_errors = get_means(l, dr, dg, s6, drs, dgs)
+#high_means, high_errors, high_all = highest_means(l, dr, dg, s6, drs, dgs)
+#plot_standards(ls, le, ss, se)
+#LS, g = plot_all_means(new_means, new_errors, 'means')
+#plot_all_means(high_means, high_errors, 'high')
+#long_means, long_errors = [new_means[0], new_means[1], new_means[2], new_means[3]], [new_errors[0], new_errors[1], new_errors[2], new_errors[3]]
+#short_means, short_errors = [new_means[4], new_means[5]], [new_errors[4], new_errors[5]]
+#plot_short(short_means, short_errors)
+#get_paper_plot(LS, g)

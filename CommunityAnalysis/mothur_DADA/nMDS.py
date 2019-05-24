@@ -11,6 +11,7 @@ from scipy.spatial import distance
 import matplotlib.patches as mpatches
 import statsmodels.stats.multitest as smm
 from pylab import *
+from matplotlib import pyplot
 
 def get_gens_and_samples(fn):
     with open(fn, 'rU') as f:
@@ -96,6 +97,7 @@ def plot_nmds(fn, ax):
             al = 0.15
         ind1 += 1
         count += 1
+    linestyles = ['-', '--', '-.', ':', '']
     for z in range(len(gens)):
         nstd = 2
         x1, y1 = x[z], y[z]
@@ -103,7 +105,7 @@ def plot_nmds(fn, ax):
         vals, vecs = eigsorted(cov)
         theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))
         w, h = 2 * nstd * np.sqrt(vals)
-        ell = Ellipse(xy=(np.mean(x1), np.mean(y1)),width=w, height=h,angle=theta, color=colors[z])     
+        ell = Ellipse(xy=(np.mean(x1), np.mean(y1)),width=w, height=h,angle=theta, color=colors[z], linestyle=linestyles[z], label=labels[z])     
         ell.set_facecolor('none')
         ax.add_artist(ell)
     ax.set_xlabel('nMDS 1')
@@ -115,6 +117,10 @@ def plot_nmds(fn, ax):
 ##############
 #Long vs short vs random vs good last 5
 ##############
+colors = ['r', 'b', 'g', 'm']
+linestyles = ['-', '--', '-.', ':', '']
+labels = ['Positive selection nine-day', 'Positive selection four-day', 'Random selection nine-day', 'Random selection four-day']
+
 fig = plt.figure(figsize=(14, 10))   
 ax1 = plt.subplot(221)
 ax2 = plt.subplot(222)
@@ -125,7 +131,15 @@ colors, labels = plot_nmds('16S_all_DADA.csv', ax1)
 colors, labels = plot_nmds('18S_all_DADA.csv', ax2)
 colors, labels = plot_nmds('16S_all_mothur.csv', ax3)
 colors, labels = plot_nmds('18S_all_mothur.csv', ax4)
-ax2.legend(bbox_to_anchor=(1.52, 1.03), scatterpoints=1)
+l1 = ax2.plot([0,1], [0,1], color=colors[0], linestyle=linestyles[0], label=labels[0])
+l2 = ax2.plot([0,1], [0,1], color=colors[1], linestyle=linestyles[1], label=labels[1])
+l3 = ax2.plot([0,1], [0,1], color=colors[2], linestyle=linestyles[2], label=labels[2])
+l4 = ax2.plot([0,1], [0,1], color=colors[3], linestyle=linestyles[3], label=labels[3])
+l5 = ax2.plot([0,1], [0,1], color='white')
+
+handles, labels = ax2.get_legend_handles_labels()
+ax2.legend([handles[4], handles[0], handles[5], handles[1], handles[6], handles[2], handles[7], handles[3]], ['Positive selection', 'nine-day', 'Positive selection', 'four-day', 'Random selection', 'nine-day', 'Random selection', 'four-day'], bbox_to_anchor=(1.05, 1.03), scatterpoints=1, fontsize=14)
+
 ax1.text(-70, 0, 'DADA2 analysis', fontsize=16, rotation=90, ha='center', va='center')
 ax3.text(-0.65, 0, 'Mothur analysis', fontsize=16, rotation=90, ha='center', va='center')
 ax1.set_title('A', loc='left', fontsize=14, weight='bold')

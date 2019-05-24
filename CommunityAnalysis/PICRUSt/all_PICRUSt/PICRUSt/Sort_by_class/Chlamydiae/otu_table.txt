@@ -1,0 +1,4 @@
+# Constructed from biom file
+#OTU ID	ASV3528	ASV2990
+4326875	1.0	0.0
+552935	0.0	1.0
