@@ -1,5 +1,5 @@
-These folders contain all data and scripts used to plot the figures in this paper.
-If anything is missing, please contact R-Wright-1 on GitHub or R.Wright.1@warwick.ac.uk
+These folders contain all data and scripts used to plot the figures in the paper: Understanding microbial community dynamics to improve optimal microbiome selection.
+If anything is missing, please contact me on here or at robyn.wright@dal.ca
 
 Experiment 1:	Figure 2
 		Supplementary figure 1
