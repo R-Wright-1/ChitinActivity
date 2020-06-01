@@ -1,5 +1,7 @@
-These folders contain all data and scripts used to plot the figures in the paper: [Understanding microbial community dynamics to improve optimal microbiome selection.](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-019-0702-x)
-If anything is missing, please contact [Robyn Wright](mailto:robyn.wright@dal.ca)
+These folders contain all data and scripts used to plot the figures in the paper: 
+##[Understanding microbial community dynamics to improve optimal microbiome selection.](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-019-0702-x)
+
+Please contact [Robyn Wright](mailto:robyn.wright@dal.ca) with any questions.
 
 **Experiment 1:**
 - Figure 2
